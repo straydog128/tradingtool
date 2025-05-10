@@ -34,25 +34,19 @@
             width: 100%;
             overflow: hidden; /* 隱藏超出容器的內容 */
             background-color: #f1f3f5; /* 淺灰色背景 */
-            border-top: 1px solid #dee2e6; /* 邊框顏色 */
-            border-bottom: 1px solid #dee2e6; /* 邊框顏色 */
             padding: 8px 0; /* 容器的垂直內邊距 */
+            border: none; /* 更新：明確設定無邊框 */
         }
 
         .ticker-canvas {
-            /* 更新：移除固定寬度和 CSS 動畫相關屬性 */
             width: 100%;
         }
-
-        /* 移除 ticker-canvas 的 CSS 動畫，因為新的 Ticker Tape 小工具會自行處理滾動 */
-        /* @-webkit-keyframes ticker-canvas { ... } */
-        /* @keyframes ticker-canvas { ... } */
 
         .tradingview-widget-container {
             position: relative;
         }
 
-        /* 以下 iframe 規則可能不再完全適用或需要，但暫時保留，以防萬一特定結構生成 */
+        /* 這些 iframe 規則主要用於舊版小工具或特定結構，對於 Ticker Tape 可能影響不大 */
         .tradingview-widget-container iframe {
             position: absolute;
             top: 0;
@@ -91,13 +85,13 @@
                   "showSymbolLogo": true,
                   "colorTheme": "light",
                   "isTransparent": true, /* 設定為 true 以便 ticker-container 的背景色透出 */
-                  "displayMode": "adaptive", /* Ticker Tape 的顯示模式，"adaptive" 通常效果不錯 */
+                  "displayMode": "adaptive", /* Ticker Tape 的顯示模式 */
                   "locale": "zh_TW"
                 }
                 </script>
             </div>
         </div>
     </div>
-    <div class="content">
+
 </body>
 </html>
