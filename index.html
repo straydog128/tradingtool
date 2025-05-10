@@ -33,67 +33,29 @@
         .ticker-container {
             width: 100%;
             overflow: hidden; /* 隱藏超出容器的內容 */
-            background-color: #f1f3f5; /* 淺灰色背景，更接近圖片 */
+            background-color: #f1f3f5; /* 淺灰色背景 */
             border-top: 1px solid #dee2e6; /* 邊框顏色 */
             border-bottom: 1px solid #dee2e6; /* 邊框顏色 */
             padding: 8px 0; /* 容器的垂直內邊距 */
         }
 
         .ticker-canvas {
-            /* 每個項目的預期寬度為 75px */
-            width: calc((75px * 15) + 2px); /* 15 個項目，每個 75px 寬，加上 2px：總寬度 1127px */
-            /*
-            75px = 在小工具腳本開始移除行情代碼前，行情項目的最小寬度
-            15 = 行情代碼的數量
-            2px = 用於 1px 的外部邊框 (來自使用者 CSS 的註解)
-            */
-            -webkit-animation-iteration-count: infinite; /* 無限次重複動畫 */
-            animation-iteration-count: infinite;
-            -webkit-animation-timing-function: linear; /* 線性動畫時間函數 */
-            animation-timing-function: linear;
-            -webkit-animation-name: ticker-canvas; /* 動畫名稱 */
-            animation-name: ticker-canvas;
-            /* 動畫時長設定為 20s */
-            -webkit-animation-duration: 20s;
-            animation-duration: 20s;
+            /* 更新：移除固定寬度和 CSS 動畫相關屬性 */
+            width: 100%;
         }
 
-        .ticker-canvas:hover {
-            animation-play-state: paused; /* 滑鼠懸停時暫停動畫 */
-        }
-
-        @-webkit-keyframes ticker-canvas {
-            0% {
-                -webkit-transform: translate3d(0, 0, 0);
-                transform: translate3d(0, 0, 0);
-                visibility: visible;
-            }
-            100% {
-                -webkit-transform: translate3d(-100%, 0, 0); /* 水平滾動整個畫布的寬度 */
-                transform: translate3d(-100%, 0, 0);
-            }
-        }
-
-        @keyframes ticker-canvas {
-            0% {
-                -webkit-transform: translate3d(0, 0, 0);
-                transform: translate3d(0, 0, 0);
-                visibility: visible;
-            }
-            100% {
-                -webkit-transform: translate3d(-100%, 0, 0);
-                transform: translate3d(-100%, 0, 0);
-            }
-        }
+        /* 移除 ticker-canvas 的 CSS 動畫，因為新的 Ticker Tape 小工具會自行處理滾動 */
+        /* @-webkit-keyframes ticker-canvas { ... } */
+        /* @keyframes ticker-canvas { ... } */
 
         .tradingview-widget-container {
             position: relative;
         }
 
+        /* 以下 iframe 規則可能不再完全適用或需要，但暫時保留，以防萬一特定結構生成 */
         .tradingview-widget-container iframe {
             position: absolute;
             top: 0;
-            /* 使用者提供的 iframe 樣式，可能用於特定情況 */
         }
 
         .tradingview-widget-container iframe:nth-of-type(2) {
@@ -104,8 +66,10 @@
 <body class="bg-gray-100">
 
     <div class="ticker-container">
-        <div class="ticker-canvas"> <div class="tradingview-widget-container"> <div class="tradingview-widget-container__widget"></div>
-                <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-tickers.js" async>
+        <div class="ticker-canvas">
+            <div class="tradingview-widget-container">
+                <div class="tradingview-widget-container__widget"></div>
+                <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
                 {
                   "symbols": [
                     { "title": "S&P 500", "proName": "INDEX:SPX" },
@@ -124,12 +88,11 @@
                     { "description": "BHP", "proName": "NYSE:BHP" },
                     { "description": "Telstra", "proName": "ASX:TLS" }
                   ],
-                  "locale": "zh_TW",
-                  "colorTheme": "light",      /* 確保文字為深色 */
-                  "isTransparent": true,    /* 小工具背景透明 */
                   "showSymbolLogo": true,
-                  "width": "100%",
-                  "displayMode": "compact"  /* 使用緊湊模式 */
+                  "colorTheme": "light",
+                  "isTransparent": true, /* 設定為 true 以便 ticker-container 的背景色透出 */
+                  "displayMode": "adaptive", /* Ticker Tape 的顯示模式，"adaptive" 通常效果不錯 */
+                  "locale": "zh_TW"
                 }
                 </script>
             </div>
