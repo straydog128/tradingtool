@@ -1,97 +1,20 @@
-<!DOCTYPE html>
-<html lang="zh-Hant">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TradingView 滾動行情小工具</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-    <style>
-        /* 使用者提供的 CSS 及調整 */
-        body {
-            margin: 0;
-            font-family: 'Inter', sans-serif; /* 基本字體 */
-            background-color: #f7fafc; /* Tailwind 的 gray-100 淺灰色背景 */
-        }
-
-        .content {
-            padding: 20px;
-            text-align: center;
-            margin-top: 1.5rem;
-        }
-
-        .content p {
-            font-family: sans-serif; /* 使用者指定 */
-            font-size: 1.125rem; /* Tailwind 的 text-lg */
-            color: #4a5568; /* Tailwind 的 gray-700 */
-        }
-
-        /**********************************/
-        /* 行情小工具特定樣式調整       */
-        /**********************************/
-
-        .ticker-container {
-            width: 100%;
-            overflow: hidden; /* 隱藏超出容器的內容 */
-            background-color: #f1f3f5; /* 淺灰色背景 */
-            padding: 8px 0; /* 容器的垂直內邊距 */
-            border: none; /* 更新：明確設定無邊框 */
-        }
-
-        .ticker-canvas {
-            width: 100%;
-        }
-
-        .tradingview-widget-container {
-            position: relative;
-        }
-
-        /* 這些 iframe 規則主要用於舊版小工具或特定結構，對於 Ticker Tape 可能影響不大 */
-        .tradingview-widget-container iframe {
-            position: absolute;
-            top: 0;
-        }
-
-        .tradingview-widget-container iframe:nth-of-type(2) {
-            left: 100%;
-        }
-    </style>
-</head>
-<body class="bg-gray-100">
-
-    <div class="ticker-container">
-        <div class="ticker-canvas">
-            <div class="tradingview-widget-container">
-                <div class="tradingview-widget-container__widget"></div>
-                <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-ticker-tape.js" async>
-                {
-                  "symbols": [
-                    { "title": "S&P 500", "proName": "INDEX:SPX" },
-                    { "title": "Nasdaq 100", "proName": "INDEX:IUXX" },
-                    { "title": "EUR/USD", "proName": "FX_IDC:EURUSD" },
-                    { "title": "BTC/USD", "proName": "BITFINEX:BTCUSD" },
-                    { "title": "ETH/USD", "proName": "BITFINEX:ETHUSD" },
-                    { "description": "Apple", "proName": "NASDAQ:AAPL" },
-                    { "description": "Berkshire", "proName": "NYSE:BRK.A" },
-                    { "description": "Microsoft", "proName": "NASDAQ:MSFT" },
-                    { "description": "Google", "proName": "NASDAQ:GOOG" },
-                    { "description": "Tesla", "proName": "NASDAQ:TSLA" },
-                    { "description": "Amazon", "proName": "NASDAQ:AMZN" },
-                    { "description": "AUD/USD", "proName": "OANDA:AUDUSD" },
-                    { "description": "Sony", "proName": "NYSE:SONY" },
-                    { "description": "BHP", "proName": "NYSE:BHP" },
-                    { "description": "Telstra", "proName": "ASX:TLS" }
-                  ],
-                  "showSymbolLogo": true,
-                  "colorTheme": "light",
-                  "isTransparent": true, /* 設定為 true 以便 ticker-container 的背景色透出 */
-                  "displayMode": "adaptive", /* Ticker Tape 的顯示模式 */
-                  "locale": "zh_TW"
-                }
-                </script>
-            </div>
-        </div>
-    </div>
-
-</body>
-</html>
+<!-- TradingView Widget BEGIN -->
+<div class="tradingview-widget-container" style="height:100%;width:100%">
+  <div class="tradingview-widget-container__widget" style="height:calc(100% - 32px);width:100%"></div>
+  <div class="tradingview-widget-copyright"><a href="https://www.tradingview.com/" rel="noopener nofollow" target="_blank"><span class="blue-text">Track all markets on TradingView</span></a></div>
+  <script type="text/javascript" src="https://s3.tradingview.com/external-embedding/embed-widget-advanced-chart.js" async>
+  {
+  "autosize": true,
+  "symbol": "NASDAQ:AAPL",
+  "interval": "D",
+  "timezone": "Etc/UTC",
+  "theme": "light",
+  "style": "1",
+  "locale": "en",
+  "hide_side_toolbar": false,
+  "allow_symbol_change": true,
+  "support_host": "https://www.tradingview.com"
+}
+  </script>
+</div>
+<!-- TradingView Widget END -->
